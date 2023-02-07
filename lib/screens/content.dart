@@ -9,73 +9,97 @@ class ContentApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black12,
+      backgroundColor: Colors.white60,
       appBar: AppBar(
         leading: Icon(Icons.menu),
         title: Text("Объявления"),
       ),
       body: Column(children: [
         Container(
-            child: OrderSell(
-                "Николай С.", "ул.Ярославского 89а", "ул.Ойуунского 16", "100"))
+            child: OrderSell("assets/avatar.jpg",
+                "С.НИКОЛАЙ", "ул.Ярославского 89а", "ул.Ойуунского 16", "100","17:30")),
+        Container(
+            child: OrderSell("assets/avatar.jpg",
+                "Л.ВАСИЛИЙ", "ул.Калинина 36", "ул.Мира 15", "150","17:20")),
+        Container(
+            child: OrderSell("assets/avatar.jpg",
+                "К.КЭСКИЛ", "ул.Озерная 1", "ул.Чернышевского 129", "250","16:55")),
       ]),
     );
   }
 }
 
-Widget OrderSell(String name, String a, String b, String sell) {
+Widget OrderSell(String avatar,String name, String a, String b, String sell, String date) {
   return Container(
-    padding: EdgeInsets.symmetric(horizontal: 10),
+    margin: EdgeInsets.only(bottom: 2,top: 2,),
+    padding: EdgeInsets.only(left: 10,right: 10),
     color: Colors.white,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    child: Column(
       children: [
         Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              padding: EdgeInsets.only(right: 20),
-              height: 80,
-              width: 80,
-              child: CircleAvatar(),
-            ),
-            Column(
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(padding: EdgeInsets.only(top: 10)),
                 Container(
-                  child: Text(
-                    name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  padding: EdgeInsets.only(right: 20),
+                  child: CircleAvatar(backgroundImage: AssetImage(avatar),radius: 35,),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Padding(padding: EdgeInsets.only(top: 10)),
                     Container(
-                      child: Text(a),
+                      child: Text(
+                        name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.blue,
+                        ),
+                      ),
                     ),
-                    Container(
-                      child: Text(b),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: Text(a),
+                        ),
+                        Container(
+                          child: Text(b),
+                        )
+                      ],
                     )
                   ],
-                )
+                ),
               ],
+            ),
+            Container(
+              child: Text(
+                sell + "Р",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.blue,
+                ),
+              ),
             ),
           ],
         ),
-        Container(
-          child: Text(
-            sell + "Р",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: Colors.black87,
+        Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(child: ElevatedButton(onPressed: (){},child: Text("Отменить"),),),
+                Container(child: ElevatedButton(onPressed: (){},child: Text("Принять заказ"),),),
+                Container(child: ElevatedButton(onPressed: (){},child: Text("+ 50 рублей"),),),
+              ],
             ),
-          ),
+            Container(padding: EdgeInsets.only(top: 10, bottom: 10,),child: Text("Время публикации объявления: " + date),)
+          ],
         )
       ],
     ),

@@ -14,7 +14,7 @@ class AuthorizationApp extends StatelessWidget {
             width: 200,
             height: 200,
             child: Image(
-              image: AssetImage("logo.png"),
+              image: AssetImage("assets/logo.png"),
             ),
           ),
           Container(
